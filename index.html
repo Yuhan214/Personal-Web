@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yuhan Xie | Game Dev</title>
+    <title>Yuhan Xie | Game Dev Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;800&family=DotGothic16&family=Inter:wght@400;600&family=Noto+Sans+SC:wght@400;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -16,80 +16,67 @@
         }
         body { 
             font-family: 'JetBrains Mono', 'Inter', 'Noto Sans SC', monospace; 
-            background-color: var(--bg-dark); 
-            color: #fff;
-            overflow-x: hidden;
-            line-height: 1.5;
+            background-color: var(--bg-dark); color: #fff; overflow-x: hidden; line-height: 1.5;
         }
         
         .fun-pixel-font { font-family: 'Press Start 2P', cursive; }
+        .universal-header-font { font-family: 'Silkscreen', 'DotGothic16', sans-serif; letter-spacing: 0.05em; font-weight: 700; text-transform: uppercase; }
         
-        /* 统一标题字体：英文用 Silkscreen，中文用 DotGothic16 */
-        .universal-header-font { 
-            font-family: 'Silkscreen', 'DotGothic16', sans-serif; 
-            letter-spacing: 0.05em; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-        }
-        
-        /* 修正：只针对描述性文本进行字号锁定，确保中英视觉一致 */
-        .desc-text-container .lang-en, 
-        .desc-text-container .lang-cn { 
+        /* 描述性文本字号锁定 */
+        .desc-text-container .lang-en, .desc-text-container .lang-cn { 
             font-size: 0.85rem !important; 
-            line-height: 1.6 !important;
-            font-family: 'Inter', 'Noto Sans SC', sans-serif;
-            color: #94a3b8;
+            line-height: 1.6 !important; 
+            font-family: 'Inter', 'Noto Sans SC', sans-serif; 
+            color: #94a3b8; 
         }
 
-        #tetris-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; pointer-events: none; overflow: hidden;
-            filter: blur(12px) contrast(1.1) brightness(0.6);
+        .bio-text .lang-en, .bio-text .lang-cn {
+            font-family: 'DotGothic16', 'Noto Sans SC', sans-serif;
+            font-size: 1.0rem !important;
+            color: var(--color-blue);
+            line-height: 1.4;
         }
+
+        #tetris-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; filter: blur(12px) contrast(1.1) brightness(0.6); }
         .tetris-block { position: absolute; opacity: 0.4; box-shadow: 0 0 20px currentColor; }
 
-        .marquee {
-            width: 100%; height: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden; position: fixed; top: 0; z-index: 100;
-        }
-        .marquee-content {
-            display: flex; white-space: nowrap;
-            animation: marquee 30s linear infinite;
-            font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--color-blue);
-            align-items: center; height: 100%;
-        }
+        .marquee { width: 100%; height: 25px; background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden; position: fixed; top: 0; z-index: 100; }
+        .marquee-content { display: flex; white-space: nowrap; animation: marquee 30s linear infinite; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--color-blue); align-items: center; height: 100%; }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        .status-card {
-            background: rgba(8, 8, 25, 0.95);
-            border: 1px solid rgba(1, 205, 254, 0.15);
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.5);
-            position: relative; transition: all 0.3s ease; overflow: hidden;
-        }
+        .status-card { background: rgba(8, 8, 25, 0.95); border: 1px solid rgba(1, 205, 254, 0.15); box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.5); position: relative; transition: all 0.3s ease; overflow: hidden; }
         .status-card:hover { border-color: var(--color-pink); transform: translateY(-3px); }
 
-        /* 初始状态逻辑 */
+        .pixel-tag { 
+            font-family: 'Press Start 2P', cursive; font-size: 0.6rem; padding: 8px 12px; margin: 0 8px 8px 0; 
+            display: inline-block; background-color: #2d2d44; border: 2px solid #5e5e80; 
+            box-shadow: 4px 4px 0px #000; color: #fff; transition: all 0.1s; cursor: default;
+        }
+        .pixel-tag:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; background-color: var(--color-pink); border-color: #fff; }
+
+        .hobby-tag {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; 
+            padding: 4px 10px; margin: 0 6px 6px 0; display: inline-block;
+            border: 1px solid #333355; color: #8899ac; background: #1a1a2e; transition: all 0.2s;
+        }
+        .hobby-tag:hover { border-color: var(--color-blue); color: var(--color-blue); }
+
+        .game-icon { 
+            width: 64px; height: 64px; background: #000; border: 2px solid #444; 
+            display: flex; align-items: center; justify-content: center; 
+            transition: all 0.3s; position: relative; box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .game-icon:hover { border-color: var(--color-yellow); transform: scale(1.1) translateY(-5px); box-shadow: 0 10px 20px rgba(255, 251, 150, 0.2); z-index: 10; }
+
         .lang-cn { display: none !important; }
         .lang-en { display: block !important; }
-
-        .gradient-text {
-            background: linear-gradient(to right, var(--color-pink), var(--color-yellow), var(--color-blue));
-            -webkit-background-clip: text; color: transparent; display: inline-block;
-        }
-
+        .gradient-text { background: linear-gradient(to right, var(--color-pink), var(--color-yellow), var(--color-blue)); -webkit-background-clip: text; color: transparent; display: inline-block; }
         .stat-bar { height: 6px; background: #1a1a3a; border-radius: 3px; overflow: hidden; }
         .hp-fill { width: 90%; background: var(--color-pink); box-shadow: 0 0 8px var(--color-pink); }
         .mp-fill { width: 75%; background: var(--color-blue); box-shadow: 0 0 8px var(--color-blue); }
 
         @keyframes bounce-pixel { 0%, 100% { transform: translateY(0); opacity: 0.4; } 50% { transform: translateY(10px); opacity: 1; } }
-        .pixel-arrow {
-            width: 20px; height: 12px; background: currentColor;
-            clip-path: polygon(0% 0%, 20% 0%, 50% 60%, 80% 0%, 100% 0%, 50% 100%);
-            animation: bounce-pixel 2s infinite ease-in-out;
-        }
-
+        .pixel-arrow { width: 20px; height: 12px; background: currentColor; clip-path: polygon(0% 0%, 20% 0%, 50% 60%, 80% 0%, 100% 0%, 50% 100%); animation: bounce-pixel 2s infinite ease-in-out; }
         .pixel-icon { width: 32px; height: 32px; fill: currentColor; }
     </style>
 </head>
@@ -97,7 +84,7 @@
 
     <div class="marquee">
         <div class="marquee-content uppercase">
-            &nbsp;&nbsp;[ System Boot: OK ] &nbsp;&nbsp;[ Location: Rochester, NY ] &nbsp;&nbsp;[ Education: RIT ] &nbsp;&nbsp;[ Skills: Unity, C#, Godot, C++ ] &nbsp;&nbsp;[ Status: Looking for Internships 2026 ] &nbsp;&nbsp;
+            &nbsp;&nbsp;[ System Boot: OK ] &nbsp;&nbsp;[ Location: Rochester, NY ] &nbsp;&nbsp;[ Education: RIT ] &nbsp;&nbsp;[ Skills: Unity, C++, Godot, Python ] &nbsp;&nbsp;[ Status: Looking for Internships 2026 ] &nbsp;&nbsp;
         </div>
     </div>
 
@@ -124,39 +111,120 @@
     </button>
 
     <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative z-10">
-        <h1 class="fun-pixel-font text-3xl md:text-6xl leading-none mb-10">
+        <h1 class="fun-pixel-font text-3xl md:text-6xl leading-none mb-12">
             <span class="block text-white drop-shadow-[3px_3px_0px_#05051a] mb-8">Hi,</span>
             <span class="block gradient-text drop-shadow-[3px_3px_0px_#000]">I'm Yuhan</span>
         </h1>
         
-        <div class="flex flex-col items-center space-y-6">
-            <div class="flex">
-                <div class="w-3 h-3 bg-pink-500 m-1 shadow-[0_0_8px_var(--color-pink)]" style="clip-path: polygon(0 30%, 20% 30%, 20% 10%, 40% 10%, 40% 30%, 60% 30%, 60% 10%, 80% 10%, 80% 30%, 100% 30%, 100% 70%, 80% 70%, 80% 90%, 60% 90%, 60% 100%, 40% 100%, 40% 90%, 20% 90%, 20% 70%, 0 70%);"></div>
-                <div class="w-3 h-3 bg-pink-500 m-1 shadow-[0_0_8px_var(--color-pink)]" style="clip-path: polygon(0 30%, 20% 30%, 20% 10%, 40% 10%, 40% 30%, 60% 30%, 60% 10%, 80% 10%, 80% 30%, 100% 30%, 100% 70%, 80% 70%, 80% 90%, 60% 90%, 60% 100%, 40% 100%, 40% 90%, 20% 90%, 20% 70%, 0 70%);"></div>
-                <div class="w-3 h-3 bg-pink-500 m-1 shadow-[0_0_8px_var(--color-pink)]" style="clip-path: polygon(0 30%, 20% 30%, 20% 10%, 40% 10%, 40% 30%, 60% 30%, 60% 10%, 80% 10%, 80% 30%, 100% 30%, 100% 70%, 80% 70%, 80% 90%, 60% 90%, 60% 100%, 40% 100%, 40% 90%, 20% 90%, 20% 70%, 0 70%);"></div>
-            </div>
-            <div class="fun-pixel-font text-[10px] text-blue-400/60 tracking-[0.2em] animate-pulse">
-                [ LET'S START ]
-            </div>
-        </div>
+        <nav class="flex flex-col space-y-6 md:space-y-0 md:flex-row md:space-x-12 mt-4">
+            <button onclick="document.getElementById('about-me').scrollIntoView({ behavior: 'smooth' })" class="animate-pulse universal-header-font text-sm text-blue-400 hover:text-pink-500 hover:scale-110 transition-all">
+                [ ABOUT_ME ]
+            </button>
+            <button onclick="document.getElementById('experience-log').scrollIntoView({ behavior: 'smooth' })" class="animate-pulse universal-header-font text-sm text-blue-400 hover:text-pink-500 hover:scale-110 transition-all">
+                [ EXPERIENCE ]
+            </button>
+            <button onclick="document.getElementById('selected-missions').scrollIntoView({ behavior: 'smooth' })" class="animate-pulse universal-header-font text-sm text-blue-400 hover:text-pink-500 hover:scale-110 transition-all">
+                [ PROJECTS ]
+            </button>
+        </nav>
 
-        <button onclick="document.getElementById('experience-log').scrollIntoView({ behavior: 'smooth' })" 
-                class="absolute bottom-32 flex justify-center hover:scale-110 transition-transform focus:outline-none">
+        <button onclick="document.getElementById('about-me').scrollIntoView({ behavior: 'smooth' })" 
+                class="absolute bottom-16 flex justify-center hover:scale-110 transition-transform focus:outline-none">
             <div class="pixel-arrow text-blue-400 shadow-[0_5px_10px_rgba(1,205,254,0.3)] cursor-pointer"></div>
         </button>
     </section>
 
-    <div id="experience-log" class="max-w-5xl mx-auto px-6 py-16 relative z-10 space-y-20">
+    <div class="max-w-5xl mx-auto px-6 space-y-32 mb-32 relative z-10">
         
-        <section>
+        <section id="about-me" class="pt-16">
+            <h2 class="fun-pixel-font text-base text-pink-500 mb-10 text-center uppercase tracking-[0.2em]">> Character_Profile</h2>
+            <div class="status-card rounded-sm p-8">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+                    
+                    <div class="md:col-span-3 flex flex-col space-y-6">
+                        <div>
+                            <div class="w-full aspect-square bg-slate-900 border-4 border-double border-blue-400 flex items-center justify-center overflow-hidden relative group">
+                                <div class="text-[8px] fun-pixel-font text-slate-700">PORTRAIT_DATA</div>
+                                <div class="absolute inset-0 bg-blue-500/10 group-hover:bg-transparent transition-all"></div>
+                            </div>
+                            <div class="mt-4 w-full bg-slate-900 p-2 border border-white/10 text-center">
+                                <span class="universal-header-font text-xs text-blue-400">Class: Game Designer</span>
+                            </div>
+                        </div>
+
+                        <div class="border border-white/10 bg-white/5 p-4 rounded-sm">
+                            <h4 class="universal-header-font text-[10px] text-gray-400 mb-3">EDUCATION_LOG:</h4>
+                            <div class="flex flex-col space-y-2">
+                                <span class="text-sm font-bold text-white leading-tight">Rochester Institute of Technology</span>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-[10px] text-gray-400">BS in Game Design & Dev</span>
+                                    <span class="text-[9px] text-pink-500/80 font-bold border border-pink-500/30 px-1.5 py-0.5 rounded">CLASS OF 2027</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-9 flex flex-col space-y-5">
+                        <div>
+                            <h3 class="universal-header-font text-3xl text-white mb-3 tracking-wide">
+                                <span class="lang-en">YUHAN XIE</span>
+                                <span class="lang-cn">谢语涵</span>
+                            </h3>
+                            <p class="bio-text">
+                                <span class="lang-en">RIT 3rd Year Game Design and Development Student.</span>
+                                <span class="lang-cn">罗切斯特理工学院 (RIT) 游戏设计与开发专业大三在读。</span>
+                            </p>
+                            
+                            <div class="mt-4 flex items-baseline space-x-2">
+                                <span class="animate-pulse text-pink-500 font-bold fun-pixel-font text-[10px]">></span>
+                                <span class="text-sm font-bold text-pink-400/90 tracking-wide font-mono uppercase shadow-pink-500/20 drop-shadow-sm">
+                                    QUEST: Seeking Summer 2026 Game Design Internships
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-white/5 pt-5">
+                            <h4 class="universal-header-font text-[10px] text-gray-500 mb-3">SKILL_INVENTORY:</h4>
+                            <div class="flex flex-wrap">
+                                <span class="pixel-tag">SYSTEM_DESIGN</span>
+                                <span class="pixel-tag">NUMERICAL_BALANCE</span>
+                                <span class="pixel-tag">UNITY/C#</span>
+                                <span class="pixel-tag">GODOT</span>
+                                <span class="pixel-tag">PYTHON</span>
+                                <span class="pixel-tag">LEVEL_DESIGN</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/5 pt-5">
+                            <div>
+                                <h4 class="universal-header-font text-[10px] text-gray-500 mb-3">SIDE_QUESTS (Hobbies):</h4>
+                                <div class="flex flex-wrap">
+                                    <span class="hobby-tag">Piano 🎹</span>
+                                    <span class="hobby-tag">Cats 🐈</span>
+                                    <span class="hobby-tag">Photography 📷</span>
+                                    <span class="hobby-tag">JRPG 🎮</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="universal-header-font text-[10px] text-gray-500 mb-3">INSPIRATION_ARCHIVE:</h4>
+                                <div class="flex flex-wrap gap-3">
+                                    <div class="game-icon" title="Elden Ring"><span class="text-[8px] text-slate-600 fun-pixel-font">ER</span></div>
+                                    <div class="game-icon" title="Final Fantasy XIV"><span class="text-[8px] text-slate-600 fun-pixel-font">FF14</span></div>
+                                    <div class="game-icon" title="Hollow Knight"><span class="text-[8px] text-slate-600 fun-pixel-font">HK</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience-log">
              <h2 class="fun-pixel-font text-base text-yellow-300 mb-10 text-center uppercase tracking-[0.2em]">> Experience_Log</h2>
              <div class="status-card rounded-sm">
                 <div class="h-10 bg-slate-900/50 w-full border-b border-white/5 flex items-center px-4">
-                    <div class="flex space-x-1.5">
-                        <div class="w-2 h-2 rounded-full bg-pink-500/50"></div>
-                        <div class="w-2 h-2 rounded-full bg-blue-500/50"></div>
-                        <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
-                    </div>
+                    <div class="flex space-x-1.5"><div class="w-2 h-2 rounded-full bg-pink-500/50"></div><div class="w-2 h-2 rounded-full bg-blue-500/50"></div><div class="w-2 h-2 rounded-full bg-yellow-500/50"></div></div>
                 </div>
                 <div class="p-7">
                     <div class="flex flex-col md:flex-row justify-between mb-6">
@@ -168,63 +236,39 @@
                     </div>
                     <div class="text-pink-500 font-bold mb-6 tracking-wide text-[10px] universal-header-font">
                         <span class="lang-en">Game Design Intern (Numerical & Systems)</span>
-                        <span class="lang-cn" style="font-size: 0.95rem;">游戏设计实习生 (数值与系统方向)</span>
+                        <span class="lang-cn text-xl">游戏设计实习生 (数值与系统方向)</span>
                     </div>
                     <ul class="space-y-4 desc-text-container">
-                        <li class="flex">
-                            <span class="text-blue-500 mr-3">>>></span>
-                            <div>
-                                <span class="lang-en">Reverse-engineered combat formulas & economic loops for top-tier competitor titles (e.g., AFK Journey).</span>
-                                <span class="lang-cn">解构竞品（如《剑与远征：启程》）战斗公式与经济环路。</span>
-                            </div>
-                        </li>
-                        <li class="flex">
-                            <span class="text-blue-500 mr-3">>>></span>
-                            <div>
-                                <span class="lang-en">Managed large-scale itemization & loot data via Excel; optimized data entry pipelines for the live ops team.</span>
-                                <span class="lang-cn">管理大规模道具掉落数据，优化录入管线。</span>
-                            </div>
-                        </li>
+                        <li class="flex"><span class="text-blue-500 mr-3">>>></span><div><span class="lang-en">Reverse-engineered combat formulas & economic loops for top-tier competitor titles (e.g., AFK Journey).</span><span class="lang-cn">解构竞品（如《剑与远征：启程》）战斗公式与经济环路。</span></div></li>
+                        <li class="flex"><span class="text-blue-500 mr-3">>>></span><div><span class="lang-en">Managed large-scale itemization & loot data via Excel; optimized data entry pipelines for the live ops team.</span><span class="lang-cn">管理大规模道具掉落数据，优化录入管线。</span></div></li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section>
+        <section id="selected-missions">
             <h2 class="fun-pixel-font text-base text-blue-300 mb-10 text-center uppercase tracking-[0.2em]">> Selected_Missions</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
                 <div class="status-card rounded-sm group">
-                    <div class="h-44 bg-slate-900 w-full relative overflow-hidden flex items-center justify-center border-b border-white/10">
-                        <span class="text-slate-800 fun-pixel-font text-[8px]">PROJECT_COVER_01</span>
-                    </div>
+                    <div class="h-44 bg-slate-900 w-full relative overflow-hidden flex items-center justify-center border-b border-white/10"><span class="text-slate-800 fun-pixel-font text-[8px]">PROJECT_COVER_01</span></div>
                     <div class="p-7">
                         <div class="flex justify-between items-start mb-6">
                             <h3 class="universal-header-font text-xl text-yellow-300">Race to the Drain</h3>
-                            <div class="text-right">
-                                <span class="text-[8px] text-slate-500 fun-pixel-font block mb-1">ROLE</span>
-                                <span class="text-[9px] text-blue-400 font-bold universal-header-font">Gameplay & Visual</span>
-                            </div>
+                            <div class="text-right"><span class="text-[8px] text-slate-500 fun-pixel-font block mb-1">ROLE</span><span class="text-[9px] text-blue-400 font-bold universal-header-font">Gameplay & Visual</span></div>
                         </div>
                         <div class="min-h-[90px] desc-text-container">
                             <p class="lang-en">Designed non-linear map exploration featuring stochastic event nodes. Constructed an AP-based resource model to balance numerical strategy.</p>
-                            <p class="lang-cn">设计非线性地图探索与基于行动点的资源经济模型。</p>
+                            <p class="lang-cn">设计非线性地图探索与基于行动点(AP)的资源经济模型。</p>
                         </div>
                         <a href="#" class="fun-pixel-font text-[8px] text-blue-400 group-hover:text-white transition-colors border-b border-blue-400 pb-0.5 mt-6 inline-block uppercase">Access_Archive ></a>
                     </div>
                 </div>
-
                 <div class="status-card rounded-sm group">
-                    <div class="h-44 bg-slate-900 w-full relative overflow-hidden flex items-center justify-center border-b border-white/10">
-                        <span class="text-slate-800 fun-pixel-font text-[8px]">PROJECT_COVER_02</span>
-                    </div>
+                    <div class="h-44 bg-slate-900 w-full relative overflow-hidden flex items-center justify-center border-b border-white/10"><span class="text-slate-800 fun-pixel-font text-[8px]">PROJECT_COVER_02</span></div>
                     <div class="p-7">
                         <div class="flex justify-between items-start mb-6">
                             <h3 class="universal-header-font text-xl text-pink-400">Ninja Delivery</h3>
-                            <div class="text-right">
-                                <span class="text-[8px] text-slate-500 fun-pixel-font block mb-1">ROLE</span>
-                                <span class="text-[9px] text-blue-400 font-bold universal-header-font">UI & Gameplay</span>
-                            </div>
+                            <div class="text-right"><span class="text-[8px] text-slate-500 fun-pixel-font block mb-1">ROLE</span><span class="text-[9px] text-blue-400 font-bold universal-header-font">UI & Gameplay</span></div>
                         </div>
                         <div class="min-h-[90px] desc-text-container">
                             <p class="lang-en">Designed core "Risk vs Reward" loop & HUD systems in Godot. Translated complex mechanics into intuitive UI feedback elements.</p>
@@ -233,7 +277,6 @@
                         <a href="#" class="fun-pixel-font text-[8px] text-pink-400 group-hover:text-white transition-colors border-b border-pink-400 pb-0.5 mt-6 inline-block uppercase">Execute_Demo ></a>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
@@ -241,36 +284,23 @@
     <footer class="py-24 relative z-10">
         <div class="max-w-3xl mx-auto px-6 border-t border-white/5 pt-20">
             <p class="fun-pixel-font text-[8px] text-gray-500 mb-16 text-center tracking-[0.4em] uppercase">Connect_Portal</p>
-            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
                 <a href="mailto:yx6927@rit.edu" class="social-link group flex flex-col items-center">
-                    <div class="mb-5 text-pink-500 group-hover:drop-shadow-[0_0_8px_var(--color-pink)] transition-all">
-                        <svg class="pixel-icon" viewBox="0 0 24 24"><path d="M2,4v16h20V4H2z M20,18H4V8l8,5l8-5V18z M4,6l8,5l8-5V6H4V6z"/></svg>
-                    </div>
-                    <span class="universal-header-font text-[10px] text-gray-500 group-hover:text-pink-400 mb-2 transition-colors">Data_Transfer</span>
-                    <span class="text-sm font-extrabold tracking-tighter whitespace-nowrap">yx6927@rit.edu</span>
+                    <div class="mb-5 text-pink-500 group-hover:drop-shadow-[0_0_8px_var(--color-pink)] transition-all"><svg class="pixel-icon" viewBox="0 0 24 24"><path d="M2,4v16h20V4H2z M20,18H4V8l8,5l8-5V18z M4,6l8,5l8-5V6H4V6z"/></svg></div>
+                    <span class="universal-header-font text-[10px] text-gray-500 group-hover:text-pink-400 mb-2 transition-colors">Data_Transfer</span><span class="text-sm font-extrabold tracking-tighter whitespace-nowrap">yx6927@rit.edu</span>
                 </a>
-
-                <a href="https://github.com/Yuhan214" target="_blank" class="social-link group flex flex-col items-center">
-                    <div class="mb-5 text-blue-400 group-hover:drop-shadow-[0_0_8px_var(--color-blue)] transition-all">
-                        <svg class="pixel-icon" viewBox="0 0 24 24"><path d="M12,2C6.47,2,2,6.47,2,12c0,4.42,2.87,8.17,6.84,9.49c0.5,0.09,0.68-0.22,0.68-0.48c0-0.24-0.01-0.89-0.01-1.74c-2.78,0.6-3.37-1.34-3.37-1.34c-0.45-1.16-1.11-1.47-1.11-1.47c-0.91-0.62,0.07-0.61,0.07-0.61c1,0.07,1.53,1.03,1.53,1.03c0.89,1.53,2.34,1.09,2.91,0.83c0.09-0.65,0.35-1.09,0.63-1.34c-2.22-0.25-4.55-1.11-4.55-4.94c0-1.09,0.39-1.98,1.03-2.68C6.6,9.22,6.26,8.2,6.83,6.83c0,0,0.84-0.27,2.75,1.02c0.8-0.22,1.65-0.33,2.5-0.33s1.7,0.11,2.5,0.33c1.91-1.29,2.75-1.02,2.75-1.02c0.57,1.37,0.23,2.39,0.11,2.65c0.64,0.7,1.03,1.59,1.03,2.68c0,3.84-2.34,4.68-4.57,4.93c0.36,0.31,0.68,0.92,0.68,1.85c0,1.34-0.01,2.42-0.01,2.75c0,0.27,0.18,0.58,0.69,0.48C19.13,20.16,22,16.42,22,12C22,6.47,17.53,2,12,2z"/></svg>
-                    </div>
-                    <span class="universal-header-font text-[10px] text-gray-500 group-hover:text-blue-300 mb-2 transition-colors">Code_Vault</span>
-                    <span class="text-sm font-extrabold tracking-tighter">GitHub</span>
+                <a href="https://github.com/yuhan214" target="_blank" class="social-link group flex flex-col items-center">
+                    <div class="mb-5 text-blue-400 group-hover:drop-shadow-[0_0_8px_var(--color-blue)] transition-all"><svg class="pixel-icon" viewBox="0 0 24 24"><path d="M12,2C6.47,2,2,6.47,2,12c0,4.42,2.87,8.17,6.84,9.49c0.5,0.09,0.68-0.22,0.68-0.48c0-0.24-0.01-0.89-0.01-1.74c-2.78,0.6-3.37-1.34-3.37-1.34c-0.45-1.16-1.11-1.47-1.11-1.47c-0.91-0.62,0.07-0.61,0.07-0.61c1,0.07,1.53,1.03,1.53,1.03c0.89,1.53,2.34,1.09,2.91,0.83c0.09-0.65,0.35-1.09,0.63-1.34c-2.22-0.25-4.55-1.11-4.55-4.94c0-1.09,0.39-1.98,1.03-2.68C6.6,9.22,6.26,8.2,6.83,6.83c0,0,0.84-0.27,2.75,1.02c0.8-0.22,1.65-0.33,2.5-0.33s1.7,0.11,2.5,0.33c1.91-1.29,2.75-1.02,2.75-1.02c0.57,1.37,0.23,2.39,0.11,2.65c0.64,0.7,1.03,1.59,1.03,2.68c0,3.84-2.34,4.68-4.57,4.93c0.36,0.31,0.68,0.92,0.68,1.85c0,1.34-0.01,2.42-0.01,2.75c0,0.27,0.18,0.58,0.69,0.48C19.13,20.16,22,16.42,22,12C22,6.47,17.53,2,12,2z"/></svg></div>
+                    <span class="universal-header-font text-[10px] text-gray-500 group-hover:text-blue-300 mb-2 transition-colors">Code_Vault</span><span class="text-sm font-extrabold tracking-tighter">GitHub</span>
                 </a>
-
                 <a href="https://linkedin.com/in/yuhanxie1209" target="_blank" class="social-link group flex flex-col items-center">
-                    <div class="mb-5 text-purple-400 group-hover:drop-shadow-[0_0_8px_var(--color-purple)] transition-all">
-                        <svg class="pixel-icon" viewBox="0 0 24 24"><path d="M19,3H5C3.89,3,3,3.9,3,5v14c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.11,3,19,3z M9,17H6.48V10H9V17z M7.74,8.94 c-0.81,0-1.47-0.66-1.47-1.47c0-0.81,0.66-1.47,1.47-1.47c0.81,0,1.47,0.66,1.47,1.47C9.21,8.28,8.55,8.94,7.74,8.94z M18,17h-2.52 v-3.95c0-0.94-0.02-2.15-1.31-2.15c-1.31,0-1.51,1.02-1.51,2.08V17H10.14V10h2.42v1h0.03c0.34-0.64,1.16-1.31,2.39-1.31 c2.56,0,3.03,1.68,3.03,3.87V17z"/></svg>
-                    </div>
-                    <span class="universal-header-font text-[10px] text-gray-500 group-hover:text-purple-300 mb-2 transition-colors">User_Profile</span>
-                    <span class="text-sm font-extrabold tracking-tighter">LinkedIn</span>
+                    <div class="mb-5 text-purple-400 group-hover:drop-shadow-[0_0_8px_var(--color-purple)] transition-all"><svg class="pixel-icon" viewBox="0 0 24 24"><path d="M19,3H5C3.89,3,3,3.9,3,5v14c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.11,3,19,3z M9,17H6.48V10H9V17z M7.74,8.94 c-0.81,0-1.47-0.66-1.47-1.47c0-0.81,0.66-1.47,1.47-1.47c0.81,0,1.47,0.66,1.47,1.47C9.21,8.28,8.55,8.94,7.74,8.94z M18,17h-2.52 v-3.95c0-0.94-0.02-2.15-1.31-2.15c-1.31,0-1.51,1.02-1.51,2.08V17H10.14V10h2.42v1h0.03c0.34-0.64,1.16-1.31,2.39-1.31 c2.56,0,3.03,1.68,3.03,3.87V17z"/></svg></div>
+                    <span class="universal-header-font text-[10px] text-gray-500 group-hover:text-purple-300 mb-2 transition-colors">User_Profile</span><span class="text-sm font-extrabold tracking-tighter">LinkedIn</span>
                 </a>
             </div>
-            
-            <div class="mt-32 text-center">
-                <p class="text-blue-300/80 font-bold text-[10px] uppercase tracking-widest">Rochester Institute of Technology</p>
-                <p class="fun-pixel-font text-[7px] text-gray-700 mt-6">EST. 2026 // ALL SYSTEMS OPERATIONAL</p>
+            <div class="mt-32 text-center border-t border-white/5 pt-10">
+                <p class="text-gray-500 text-[10px]">© 2026 Yuhan Xie. All Rights Reserved.</p>
+                <p class="text-[7px] text-slate-700 mt-2 fun-pixel-font">CO-OP MODE: BUILT WITH <span class="text-pink-500">♥</span> & GEMINI</p>
             </div>
         </div>
     </footer>
@@ -281,26 +311,21 @@
             const cnElems = document.querySelectorAll('.lang-cn');
             const enElems = document.querySelectorAll('.lang-en');
             const btn = document.getElementById('langBtn');
-
             if (currentLang === 'en') {
                 enElems.forEach(el => el.style.setProperty('display', 'none', 'important'));
                 cnElems.forEach(el => el.style.setProperty('display', 'block', 'important'));
-                btn.innerText = "[ SWITCH TO EN ]";
-                currentLang = 'cn';
+                btn.innerText = "[ SWITCH TO EN ]"; currentLang = 'cn';
             } else {
                 cnElems.forEach(el => el.style.setProperty('display', 'none', 'important'));
                 enElems.forEach(el => el.style.setProperty('display', 'block', 'important'));
-                btn.innerText = "[ SWITCH TO ZH ]";
-                currentLang = 'en';
+                btn.innerText = "[ SWITCH TO ZH ]"; currentLang = 'en';
             }
         }
 
         function createBlurredTetrisBg() {
             const container = document.getElementById('tetris-container');
             const colors = ['var(--color-pink)', 'var(--color-blue)', 'var(--color-purple)', 'var(--color-yellow)'];
-            const blockCount = 30;
-
-            for (let i = 0; i < blockCount; i++) {
+            for (let i = 0; i < 30; i++) {
                 const block = document.createElement('div');
                 block.classList.add('tetris-block');
                 const baseSize = Math.random() * 30 + 50;
@@ -308,15 +333,11 @@
                 block.style.height = `${baseSize * (Math.random() > 0.5 ? 2 : 1.5)}px`;
                 block.style.left = Math.random() * 100 + 'vw';
                 const color = colors[Math.floor(Math.random() * colors.length)];
-                block.style.backgroundColor = color;
-                block.style.color = color;
-                const duration = Math.random() * 30 + 30;
-                const delay = Math.random() * -60;
-                block.style.animation = `blurredFall ${duration}s linear ${delay}s infinite`;
+                block.style.backgroundColor = color; block.style.color = color;
+                block.style.animation = `blurredFall ${Math.random() * 30 + 30}s linear ${Math.random() * -60}s infinite`;
                 container.appendChild(block);
             }
         }
-
         const styleSheet = document.createElement("style");
         styleSheet.innerText = `@keyframes blurredFall { 0% { transform: translateY(-20vh) rotate(0deg); opacity: 0; } 15% { opacity: 0.4; } 85% { opacity: 0.4; } 100% { transform: translateY(120vh) rotate(360deg); opacity: 0; } }`;
         document.head.appendChild(styleSheet);
